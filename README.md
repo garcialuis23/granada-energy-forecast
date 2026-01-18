@@ -1,39 +1,3 @@
-granada_smart_city/
-│
-├── .env                    # TUS CLAVES DE SUPABASE (No subir a GitHub)
-├── requirements.txt        # Librerías (pandas, fastapi, sqlalchemy, psycopg2-binary, scikit-learn)
-├── README.md               # Explicación del proyecto
-│
-├── data/                   # ALMACÉN DE DATOS (Local)
-│   ├── raw/                # Aquí pones el "consumo_granada.csv" original
-│   ├── processed/          # (Opcional) Si quieres guardar CSVs limpios intermedios
-│   └── models/             # Aquí se guardará tu "modelo_final.joblib"
-│
-├── notebooks/              # TU LABORATORIO (Data Science)
-│   ├── 01_limpieza_analisis.ipynb   # Pruebas de limpieza
-│   └── 02_entrenamiento.ipynb       # Pruebas de modelos
-│
-├── scripts/                # SCRIPTS DE MANTENIMIENTO (Se ejecutan 1 vez)
-│   └── ingest_data.py      # EL SCRIPT QUE USA PANDAS PARA SUBIR DATOS A SUPABASE
-│
-└── src/                    # LA APLICACIÓN WEB (Production Ready)
-    ├── __init__.py
-    ├── main.py             # Punto de entrada de FastAPI
-    ├── config.py           # Configuración (carga el .env)
-    ├── database.py         # Conexión a Supabase para la App
-    │
-    ├── routes/             # Las URLs de tu web
-    │   ├── dashboard.py    # Rutas para gráficas
-    │   └── prediction.py   # Rutas para predecir
-    │
-    ├── services/           # Lógica de negocio
-    │   └── model_loader.py # Carga el modelo .joblib
-    │
-    └── templates/          # Tus HTMLs
-        ├── base.html
-        └── dashboard.html
-
-
 # ⚡ Granada Smart City: Energy Forecast System
 
 > **Sistema Inteligente de Predicción de Demanda Energética** desarrollado para el Ayuntamiento de Granada.
