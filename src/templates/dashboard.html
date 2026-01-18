@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid mb-5">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-5 fw-bold text-dark">Cuadro de Mando</h1>
+            <p class="text-muted mb-0">Monitorización detallada por zona y condiciones climáticas</p>
+        </div>
+        <div class="text-end">
+             <span class="badge bg-primary fs-6 px-3 py-2">
+                <i class="fas fa-database me-2"></i> Datos Históricos
+             </span>
+        </div>
+    </div>
+
+    <div class="card shadow-lg mb-4 border-0">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-filter me-2"></i> Configuración del Análisis 2015 - 2025 </span>
+                    <span class="badge bg-warning text-dark">Máx. 7 días</span>
+                </div>
+        <div class="card-body p-4 bg-white rounded-3">
+            <form id="dashboardFilterForm">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label text-primary">
+                            <i class="fas fa-map-marker-alt me-1"></i> Seleccionar Zona
+                        </label>
+                        <select class="form-select" id="zone_name" required>
+                            <option value="" selected disabled>Cargando zonas...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-primary">
+                            <i class="far fa-calendar-alt me-1"></i> Desde
+                        </label>
+                        <input type="datetime-local" class="form-control" id="start_date" 
+                               min="2015-01-01T00:00" max="2025-12-30T23:59" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-primary">
+                            <i class="far fa-calendar-alt me-1"></i> Hasta
+                        </label>
+                        <input type="datetime-local" class="form-control" id="end_date" 
+                               min="2015-01-01T00:00" max="2025-12-31T23:59" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">
+                            <i class="fas fa-sync-alt me-2"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboardResults" class="d-none animate-fade-in">
+        
+        <div class="row g-4 mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="card h-100 border-start border-4 border-info shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-uppercase text-muted mb-0">Consumo Total</h6>
+                            <i class="fas fa-bolt text-info fs-4 opacity-50"></i>
+                        </div>
+                        <h2 class="fw-bold mb-0 text-dark"><span id="kpi_total">0</span> <small class="fs-6 text-muted">kWh</small></h2>
+                        <small class="text-success"><i class="fas fa-calendar-week me-1"></i> En el periodo</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card h-100 border-start border-4 border-primary shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-uppercase text-muted mb-0">Promedio / Hora</h6>
+                            <i class="fas fa-clock text-primary fs-4 opacity-50"></i>
+                        </div>
+                        <h2 class="fw-bold mb-0 text-dark"><span id="kpi_avg">0</span> <small class="fs-6 text-muted">kWh</small></h2>
+                        <small class="text-primary"><i class="fas fa-chart-line me-1"></i> Flujo medio</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card h-100 border-start border-4 border-warning shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-uppercase text-muted mb-0">Temp. Media</h6>
+                            <i class="fas fa-temperature-high text-warning fs-4 opacity-50"></i>
+                        </div>
+                        <h2 class="fw-bold mb-0 text-dark"><span id="kpi_temp">0</span> <small class="fs-6 text-muted">°C</small></h2>
+                        <small class="text-warning"><i class="fas fa-sun me-1"></i> Clima registrado</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card h-100 border-start border-4 border-danger shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-uppercase text-muted mb-0">Pico Máximo</h6>
+                            <i class="fas fa-mountain text-danger fs-4 opacity-50"></i>
+                        </div>
+                        <h2 class="fw-bold mb-0 text-dark"><span id="kpi_max">0</span> <small class="fs-6 text-muted">kWh</small></h2>
+                        <small class="text-danger"><i class="fas fa-arrow-up me-1"></i> Récord periodo</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow border-0">
+            <div class="card-header bg-white pt-4 px-4 border-0">
+                <h4 class="fw-bold text-dark"><i class="fas fa-chart-area me-2"></i>Evolución Horaria</h4>
+                <p class="text-muted">Relación entre el Consumo Eléctrico y la Temperatura Ambiente</p>
+            </div>
+            <div class="card-body p-4">
+                <div style="height: 450px; width: 100%;">
+                    <canvas id="comboChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="errorAlert" class="alert alert-danger mt-4 d-none shadow">
+        <div class="d-flex align-items-center">
+            <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+            <div>
+                <h5 class="alert-heading fw-bold mb-1">¡Ups! Algo salió mal</h5>
+                <p class="mb-0" id="errorMessage">Error desconocido.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let comboChart = null;
+
+    // 1. Cargar Zonas al inicio
+    document.addEventListener('DOMContentLoaded', async () => {
+        const sel = document.getElementById('zone_name');
+        try {
+            const res = await fetch('/api/zones');
+            const data = await res.json();
+            sel.innerHTML = '<option value="" selected disabled>Seleccionar zona...</option>';
+            data.zones.forEach(z => {
+                const opt = document.createElement('option');
+                opt.value = z; opt.textContent = z;
+                sel.appendChild(opt);
+            });
+        } catch(e) { console.error(e); }
+    });
+
+    // 2. Manejar el Formulario
+    document.getElementById('dashboardFilterForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const btn = this.querySelector('button');
+        const originalText = btn.innerHTML;
+        const results = document.getElementById('dashboardResults');
+        const errorAlert = document.getElementById('errorAlert');
+
+        // UI Loading
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Cargando...';
+        btn.disabled = true;
+        results.classList.add('d-none');
+        errorAlert.classList.add('d-none');
+
+        const payload = {
+            zone_name: document.getElementById('zone_name').value,
+            start_date: document.getElementById('start_date').value,
+            end_date: document.getElementById('end_date').value
+        };
+
+        try {
+            const res = await fetch('/api/dashboard/update', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                // Actualizar KPIs
+                document.getElementById('kpi_total').innerText = data.kpis.total_consumo;
+                document.getElementById('kpi_avg').innerText = data.kpis.promedio_hora;
+                document.getElementById('kpi_temp').innerText = data.kpis.temp_media;
+                document.getElementById('kpi_max').innerText = data.kpis.pico_maximo;
+
+                // Actualizar Gráfico
+                renderComboChart(data.chart);
+
+                results.classList.remove('d-none');
+            } else {
+                throw new Error(data.detail || 'Error al obtener datos');
+            }
+        } catch (err) {
+            document.getElementById('errorMessage').innerText = err.message;
+            errorAlert.classList.remove('d-none');
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    });
+
+    // 3. Renderizar Gráfico Dual (Barras + Línea)
+    function renderComboChart(data) {
+        const ctx = document.getElementById('comboChart').getContext('2d');
+        if (comboChart) comboChart.destroy();
+
+        comboChart = new Chart(ctx, {
+            type: 'bar', // Tipo base
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: 'Consumo (kWh)',
+                        data: data.consumption,
+                        type: 'bar',
+                        backgroundColor: 'rgba(13, 110, 253, 0.6)', // Azul Bootstrap
+                        borderColor: 'rgba(13, 110, 253, 1)',
+                        borderWidth: 1,
+                        borderRadius: 2,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Temperatura (°C)',
+                        data: data.temperature,
+                        type: 'line',
+                        borderColor: '#ffc107', // Amarillo/Naranja Bootstrap
+                        backgroundColor: 'rgba(255, 193, 7, 0.2)',
+                        borderWidth: 3,
+                        pointRadius: 2,
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        grid: { display: false }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: { display: true, text: 'Consumo (kWh)' },
+                        grid: { borderDash: [5, 5] }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: { display: true, text: 'Temperatura (°C)' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y;
+                                    if (context.dataset.type === 'line') label += ' °C';
+                                    else label += ' kWh';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

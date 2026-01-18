@@ -1,0 +1,361 @@
+:root {
+    --dark-navy: #0a1929;
+    --medium-navy: #1a2f42;
+    --accent-teal: #00acc1;
+    --accent-cyan: #26c6da;
+    --success-green: #66bb6a;
+    --warning-orange: #ffa726;
+    --danger-red: #ef5350;
+    --light-gray: #eceff1;
+    --text-primary: #37474f;
+    --text-secondary: #78909c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: linear-gradient(to bottom, #e3f2fd 0%, #ffffff 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Navbar moderno y elegante */
+.navbar {
+    background: linear-gradient(135deg, var(--dark-navy) 0%, var(--medium-navy) 100%) !important;
+    box-shadow: 0 4px 20px rgba(10, 25, 41, 0.3);
+    padding: 1.2rem 0 !important;
+    border-bottom: 2px solid var(--accent-teal);
+}
+
+.navbar-brand {
+    font-size: 1.7rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.navbar-brand i {
+    font-size: 2rem;
+    color: var(--accent-cyan);
+    filter: drop-shadow(0 0 10px rgba(38, 198, 218, 0.5));
+}
+
+.nav-link {
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 0.6rem 1.5rem !important;
+    margin: 0 0.3rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+}
+
+.nav-link:hover {
+    background: rgba(0, 172, 193, 0.15) !important;
+    color: var(--accent-cyan) !important;
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background: var(--accent-teal) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(0, 172, 193, 0.4);
+}
+
+/* Container principal */
+main {
+    padding: 2.5rem 2rem !important;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Headers mejorados */
+.display-5 {
+    font-weight: 800 !important;
+    font-size: 2.5rem !important;
+    color: var(--dark-navy) !important;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.text-primary {
+    color: var(--accent-teal) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+    font-size: 1.1rem;
+}
+
+/* Cards ultra profesionales */
+.card {
+    border: none !important;
+    border-radius: 16px !important;
+    background: white;
+    box-shadow: 0 8px 24px rgba(10, 25, 41, 0.12) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 12px 32px rgba(10, 25, 41, 0.18) !important;
+    transform: translateY(-4px);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--dark-navy) 0%, var(--medium-navy) 100%) !important;
+    color: white !important;
+    padding: 1.3rem 2rem !important;
+    border-bottom: 3px solid var(--accent-teal) !important;
+    border-radius: 16px 16px 0 0 !important;
+    font-weight: 700 !important;
+    font-size: 1.15rem !important;
+    letter-spacing: 0.3px;
+}
+
+.card-header i {
+    color: var(--accent-cyan);
+    margin-right: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.card-header.bg-white {
+    background: white !important;
+    color: var(--dark-navy) !important;
+    border-bottom: 3px solid var(--accent-teal) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-header.bg-white i {
+    color: var(--accent-teal);
+}
+
+.card-body {
+    padding: 2rem !important;
+    background: white;
+}
+
+/* KPI Cards con diseño premium */
+.card.h-100 .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.5rem !important;
+    position: relative;
+}
+
+.card.h-100 .card-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--accent-teal), var(--accent-cyan));
+}
+
+.card .display-4 {
+    font-size: 3.5rem !important;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-weight: 800 !important;
+    font-size: 2rem !important;
+    color: var(--dark-navy) !important;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem !important;
+}
+
+.card p {
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card small {
+    color: var(--text-secondary) !important;
+    font-size: 0.85rem !important;
+}
+
+/* Iconos mejorados */
+.text-warning {
+    color: var(--warning-orange) !important;
+    filter: drop-shadow(0 4px 8px rgba(255, 167, 38, 0.3));
+}
+
+.text-info {
+    color: var(--accent-cyan) !important;
+    filter: drop-shadow(0 4px 8px rgba(38, 198, 218, 0.3));
+}
+
+.text-danger {
+    color: var(--danger-red) !important;
+    filter: drop-shadow(0 4px 8px rgba(239, 83, 80, 0.3));
+}
+
+.text-success {
+    color: var(--success-green) !important;
+    filter: drop-shadow(0 4px 8px rgba(102, 187, 106, 0.3));
+}
+
+/* Formularios premium */
+.form-label {
+    font-weight: 700 !important;
+    color: var(--dark-navy) !important;
+    margin-bottom: 0.7rem !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-label i {
+    color: var(--accent-teal);
+    margin-right: 0.5rem;
+}
+
+.form-select, .form-control {
+    border: 2px solid #cfd8dc !important;
+    border-radius: 10px !important;
+    padding: 0.75rem 1.2rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    background-color: #fafafa !important;
+    transition: all 0.3s ease;
+}
+
+.form-select:hover, .form-control:hover {
+    background-color: white !important;
+    border-color: var(--accent-teal) !important;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 0 4px rgba(38, 198, 218, 0.1) !important;
+    background-color: white !important;
+    outline: none;
+}
+
+/* Botón principal espectacular */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-cyan) 100%) !important;
+    border: none !important;
+    padding: 1rem 3rem !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 20px rgba(0, 172, 193, 0.4) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 10px 30px rgba(0, 172, 193, 0.5) !important;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(1) !important;
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    transform: none !important;
+    cursor: not-allowed;
+}
+
+/* Alert profesional */
+.alert-info {
+    background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%) !important;
+    border: none !important;
+    border-left: 5px solid var(--accent-teal) !important;
+    border-radius: 12px !important;
+    color: #01579b !important;
+    padding: 1.2rem 1.5rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(0, 172, 193, 0.15);
+}
+
+/* Spinner moderno */
+.spinner-border {
+    border-width: 0.4rem !important;
+    width: 5rem !important;
+    height: 5rem !important;
+    color: var(--accent-cyan) !important;
+}
+
+/* Footer elegante */
+footer {
+    background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%) !important;
+    border-top: 3px solid var(--accent-teal);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 4rem !important;
+    padding: 2rem 0 !important;
+}
+
+footer p {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+}
+
+footer i {
+    color: var(--accent-teal);
+}
+
+/* Mensaje inicial */
+#mensajeInicial i {
+    color: var(--accent-teal) !important;
+    opacity: 0.3;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.3rem !important;
+    }
+    
+    .display-5 {
+        font-size: 2rem !important;
+    }
+    
+    main {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+}
